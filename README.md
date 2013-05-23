@@ -24,6 +24,6 @@ If you don't want to be hassled with compiling the app yourself, you may just fo
   python antitaintdroid-server.py # runs the server
 ```
 
-  [1]: http://www.nicta.com.au/pub?id=6865
+  [1]: http://www.nicta.com.au/pub?id=7091
   [2]: http://appanalysis.org/
   [3]: http://babilonline.blogspot.com.au/2012/08/antitaintdroid-escaping-taint-analysis.html
