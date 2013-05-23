@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AntiTaintDroid</string>
+    <string name="todo">TODO</string>
+    <string name="menuExit">Exit</string>
+    <string name="menuSettings">Settings</string>
+</resources>
