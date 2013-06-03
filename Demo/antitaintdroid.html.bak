@@ -1,0 +1,129 @@
+<!doctype html>
+<html>
+  <head>
+    <link href='http://fonts.googleapis.com/css?family=Macondo' rel='stylesheet' type='text/css'>
+    <link href='antitaintdroid.css' rel='stylesheet' type='text/css'>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script src="http://popcornjs.org/code/dist/popcorn-complete.min.js"></script>
+
+    <script type="text/javascript">
+      function beepControl() {
+        ctrl = document.getElementById("ctrl");
+        var beep = Popcorn("#audio");
+
+        if (!beep.paused()) {
+          beep.pause();
+          ctrl.src = "mute.png";
+        } else if (beep.paused()) {
+          beep.play();
+          ctrl.src = "sound.png";
+        }
+      }
+    </script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+
+        var pop = Popcorn("#ourvideo");
+        var beep = Popcorn.youtube('#audio', 'http://www.youtube.com/watch?v=wZ4JoovKWCU');
+        // beep.play();
+
+        pop.footnote({
+          start: 0, end: 5, target: "footnotediv",
+          text: "This video shows a demonstration of AntiTaintDroid a.k.a. ScrubDroid in action!",
+        });
+
+        pop.footnote({
+          start: 6, end: 10, target: "footnotediv",
+          text: "First we are going to show that TaintDroid is really running in the emulator.",
+        });
+
+        pop.footnote({
+          start: 11, end: 22, target: "footnotediv",
+          text: "As can be seen, TaintDroid works and it cought the evastion of IMEI by our AntiTaint/Scrub-Droid app.",
+        });
+
+        pop.footnote({
+          start: 24, end: 27, target: "footnotediv",
+          text: "Now we are going to test our attacks against TaintDroid. ",
+        });
+
+        pop.footnote({
+          start: 27, end: 30, target: "footnotediv",
+          text: "First, a very simple variable manipulation attack ...",
+        });
+
+        pop.footnote({
+          start: 30, end: 51, target: "footnotediv",
+          text: "IMEI (000000000000000 for the emulator) pop-up in the left-side server console indicates the evasion of private data. <br />",
+        });
+
+        pop.footnote({
+          start: 35, end: 51, target: "footnotediv",
+          text: "Now trying various other attacks ...",
+        });
+
+        pop.footnote({
+          start: 51, end: 55, target: "footnotediv",
+          text: "Remote Control Attack exploits a series of mutable conditionals coming from the attacker's server.",
+        });
+
+        pop.footnote({
+          start: 55, end: 61, target: "footnotediv",
+          text: "No TaintDroid pop-up alert means the attack wasn't detected.",
+        });
+
+        pop.footnote({
+          start: 61, end: 65, target: "footnotediv",
+          text: "Now verifying again that TaintDroid is still working for regular tainted variables as it should.",
+        });
+
+        pop.footnote({
+          start: 66, end: 74, target: "footnotediv",
+          text: "... and our attacks still work ;-)",
+        });
+
+        pop.footnote({
+          start: 70, end: 74, target: "footnotediv",
+          text: "<br />Thanks for watching.",
+        });
+
+        pop.play();
+        beepControl();
+
+      }, false);
+    </script>
+
+
+  </head>
+  <body>
+
+  <div class="video" style="width:1312px; margin: 10px auto;">
+    <video height="624" width="1312" id="ourvideo" controls loop preload="auto">
+      <source src="antitaintdroid.ogv">
+      <source src="antitaintdroid.mp4">
+      <source src="antitaintdroid.webm">
+    </video>
+  </div>
+
+  <div class="wrapper">
+    <div id="footnotediv" style="margin: 10px auto;">
+    </div>
+    <div class="ribbon-wrapper-green">
+      <div class="ribbon-green">Caption</div>
+    </div>
+  </div>
+
+  <!--
+  <audio id="audio" loop preload="auto">
+    <source src="resident_evil.ogg">
+    <source src="resident_evil.mp3">
+  </audio>
+  -->
+  
+  <div id="audio" style="width: 0px; height: 0px;"> </div>
+  <img class="button" id="ctrl" onclick="beepControl()" height="58px" width="58px" style="margin-left: auto; margin-right: auto; display: block;"/>
+
+  </body>
+</html>
