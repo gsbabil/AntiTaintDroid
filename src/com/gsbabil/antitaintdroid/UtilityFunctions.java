@@ -171,8 +171,8 @@ public class UtilityFunctions {
 		// data.put("CellLocation", tm.getCellLocation().toString());
 		// data.put("SimSerialNumber", tm.getSimSerialNumber());
 		// data.put("SimOperatorName", tm.getNetworkOperatorName());
-		data.put("SubscriberId", tm.getSubscriberId());
-//		data.put("DeviceId", tm.getDeviceId());
+//		data.put("SubscriberId", tm.getSubscriberId());
+		data.put("DeviceId", tm.getDeviceId());
 //		data.put("Microphone", getMicrophoneSample());
 //		data.put("Camera", getCameraSample());
 //		data.put("Accelerometer", getAccelerometerSample());

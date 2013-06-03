@@ -7,8 +7,14 @@
     <ListView
         android:id="@+id/listView"
         android:layout_width="match_parent"
-        android:layout_height="309dp" >
+        android:layout_height="300dp" >
     </ListView>
+
+    <View
+        android:id="@+id/view1"
+        android:layout_width="wrap_content"
+        android:layout_height="2dp"
+        android:background="@android:color/holo_blue_dark" />
 
     <TextView
         android:id="@+id/textview"
@@ -16,7 +22,9 @@
         android:layout_height="match_parent"
         android:fontFamily="Monospace"
         android:text=""
-        android:textColor="#FFBDD73C" />
+        android:textColor="#FFBDD73C"
+        android:padding="2dp"
+        android:layout_marginTop="2dp" />
 
     <TextView
         android:id="@+id/ocrTextview"
