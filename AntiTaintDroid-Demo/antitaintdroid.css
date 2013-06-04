@@ -12,6 +12,12 @@
 }
 
 .button {
+  height: 36px;
+  width: 36px;
+  margin-left: auto; 
+  margin-right: auto; 
+  display: block;
+
   /*Rounded Corners*/
  -webkit-border-radius: 10px;
  -moz-border-radius: 10px;
@@ -38,8 +44,8 @@ transition: All 0.5s ease;
 }
 
 .button:hover {
-  width: 68px;
-  height: 68px;
+  width: 38px;
+  height: 38px;
 }
 
 .wrapper {
@@ -110,6 +116,14 @@ transition: All 0.5s ease;
 }
 .ribbon-green:after {
   right: 0;
+}
+
+#preloadedImages {
+    width: 0px;
+    height: 0px;
+    display: inline;
+    background-image: url(mute.png);
+    background-image: url(sound.png);
 }
 
 

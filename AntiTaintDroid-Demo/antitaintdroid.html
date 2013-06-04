@@ -4,31 +4,16 @@
     <link href='http://fonts.googleapis.com/css?family=Macondo' rel='stylesheet' type='text/css'>
     <link href='antitaintdroid.css' rel='stylesheet' type='text/css'>
 
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-    <script src="http://popcornjs.org/code/dist/popcorn-complete.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script type="text/javascript" src="http://popcornjs.org/code/dist/popcorn-complete.min.js"></script>  
 
     <script type="text/javascript">
-      function beepControl() {
-        ctrl = document.getElementById("ctrl");
-        var beep = Popcorn("#audio");
-
-        if (!beep.paused()) {
-          beep.pause();
-          ctrl.src = "mute.png";
-        } else if (beep.paused()) {
-          beep.play();
-          ctrl.src = "sound.png";
-        }
-      }
     </script>
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {
 
         var pop = Popcorn("#ourvideo");
-        // var beep = Popcorn.youtube('#audio', 'http://www.youtube.com/watch?v=wZ4JoovKWCU');
-        var beep = Popcorn.youtube('#audio', 'https://soundcloud.com/chrisse/resident-evil-main-extended');
-        // beep.play();
 
         pop.footnote({
           start: 0, end: 5, target: "footnotediv",
@@ -90,8 +75,7 @@
           text: "<br />Thanks for watching.",
         });
 
-        pop.play();
-        beepControl();
+        // pop.play();
 
       }, false);
     </script>
@@ -100,8 +84,9 @@
   </head>
   <body>
 
-  <div class="video" style="width:1312px; margin: 10px auto;">
-    <video height="624" width="1312" id="ourvideo" controls loop preload="auto">
+  <div id="preloadImages"></div>
+  <div class="video" style="height:520px; width:1000px; margin: -5px auto;">
+    <video height="520" width="1000" id="ourvideo" controls loop preload="auto">
       <source src="antitaintdroid.ogv">
       <source src="antitaintdroid.mp4">
       <source src="antitaintdroid.webm">
@@ -115,16 +100,54 @@
       <div class="ribbon-green">Caption</div>
     </div>
   </div>
-
-  <!--
-  <audio id="audio" loop preload="auto">
-    <source src="resident_evil.ogg">
-    <source src="resident_evil.mp3">
-  </audio>
-  -->
+  <img class="button" id="ctrl" onclick="beepControl()"/>
   
-  <div id="audio" style="width: 0px; height: 0px;"> </div>
-  <img class="button" id="ctrl" onclick="beepControl()" height="58px" width="58px" style="margin-left: auto; margin-right: auto; display: block;"/>
+  <div id="player"></div>
+  <script>
+      //Load player api asynchronously.
+      var tag = document.createElement('script');
+      tag.src = "https://www.youtube.com/iframe_api";
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+      var player;
+      var paused = false;
+      function onYouTubeIframeAPIReady() {
+          player = new YT.Player('player', {
+            height: '1',
+            width: '1',
+            videoId: 'wZ4JoovKWCU',
+            events: {
+              'onReady': onPlayerReady,
+              'onStateChange': onPlayerStateChange
+            }
+          });
+      }
+      function onPlayerReady(evt) {
+          evt.target.playVideo();
+          Popcorn("#ourvideo").play();
+      }
+      function onPlayerStateChange(evt) {
+          if (evt.data == YT.PlayerState.PLAYING) {
+            paused = false;
+            ctrl.src = "mute.png";
+          } else {
+            paused = true;
+            ctrl.src = "sound.png";
+          }
+      }
+      function beepControl() {
+        ctrl = document.getElementById("ctrl");
+        
+        if (paused == false) {
+          player.stopVideo();
+          ctrl.src = "mute.png";
+        } else {
+          player.playVideo();
+          ctrl.src = "sound.png";
+        }
+      }
+
+  </script>
 
   </body>
 </html>
