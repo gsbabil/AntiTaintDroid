@@ -80,7 +80,10 @@ public class MyListViewAdapter extends ArrayAdapter<String> {
 			holder.image.setImageResource(R.drawable.remote_dex);
 		} else if (holder.text.getText() == "Remote Control Trick") {
 			holder.image.setImageResource(R.drawable.remote_control);
-		} else {
+		} else if (holder.text.getText() == "File LastModified Trick") {
+			holder.image.setImageResource(R.drawable.last_modified);
+		}
+		else {
 			holder.image.setImageResource(R.drawable.batman);
 		}
 		return rowView;
