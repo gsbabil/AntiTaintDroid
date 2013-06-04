@@ -31,17 +31,7 @@
         <h2>
 <a name="antitaintdroid-aka-scrubdroid" class="anchor" href="#antitaintdroid-aka-scrubdroid"><span class="octicon octicon-link"></span></a>AntiTaintDroid (a.k.a. ScrubDroid)</h2>
 
-<p><a href="http://babilonline.blogspot.com.au/2012/08/antitaintdroid-escaping-taint-analysis.html">AntiTaintDroid</a> (a.k.a. <a href="http://www.nicta.com.au/pub?id=7091">ScrubDroid</a>) is a proof-of-concept Android application offering a working implementation of the techniques presented in our <a href="http://www.nicta.com.au/pub?id=7091">SECRYPT 2013</a> which can be exploited to bypass the security protections offered by <a href="http://appanalysis.org/">TaintDroid</a>.</p>
-
-<h3>
-<a name="compiling-the-code" class="anchor" href="#compiling-the-code"><span class="octicon octicon-link"></span></a>Compiling the code</h3>
-
-<p>I have included both the Eclipse and Ant project files. You should just be able to import it in Eclipse and hit the <code>Run</code> button. Or, you can just do <code>ant debug install</code> to compile and install it on your TaintDroid phone.</p>
-
-<h3>
-<a name="how-antitaintdroid-works" class="anchor" href="#how-antitaintdroid-works"><span class="octicon octicon-link"></span></a>How AntiTaintDroid works</h3>
-
-<p>The mechanisms to bypass TaintDroid protections are elaborated in our <a href="http://www.nicta.com.au/pub?id=7091">paper</a>. Also, the code itself if pretty self-explanatory. Just go through <code>UntaintTricks.java</code> and you should be fine. You should note that the way this PoC app works is - first it collects some private information (e.g. IMEI, Android ID etc.) from the phone with <code>collectPrivateData()</code> and then it tries to leak it over the network. Where the data is leaked to depends on where you run the server component. AntiTaintDroid PoC comes with a simple Python server which you can find in <code>AntiTaintDroid-Server</code> directory. Just make sure that you <code>cd</code> inside the <code>AntiTaintDroid-Server</code> directory and then run the <code>python antitaintdroid-server.py</code> script. The server should start a very simple web-server on port <code>8000</code>. Now you can go back to the app and hit <code>menu &gt; settings</code> to specify your server IP address and port number. That's it! Now you are ready to try all the AntiTaintDroid tricks. Each time you tap on a trick, some private data (depending on what you have in <code>collectPrivateData()</code>) should be stolen, leaked to your server (<code>antitaintdroid-server.py</code> will print it on the console) and of course there won't be any TaintDroid notification to alert you that your IMEI has just been stolen. Cheers!</p>
+<p><a href="http://babilonline.blogspot.com.au/2012/08/antitaintdroid-escaping-taint-analysis.html">AntiTaintDroid</a> (a.k.a. <a href="http://www.nicta.com.au/pub?id=7091">ScrubDroid</a>) is a proof-of-concept Android application offering a working implementation of the techniques presented in our <a href="http://www.nicta.com.au/pub?id=7091">SECRYPT 2013</a> which can be exploited to bypass the security protections offered by <a href="http://appanalysis.org/">TaintDroid</a>, a real-time privacy monitoring mechanism based on dynamic taint analysis. TaintDroid is a joint collaboration between <a href="http://www.intel.com/research/">Intel Labs</a>, <a href="http://www.cse.psu.edu/">Penn State</a>, <a href="http://www.cs.duke.edu/">Duke University</a> and <a href="http://www.nsf.gov/">U.S. National Science Foundation</a>. </p>
 
 <h3>
 <a name="quick-installation-guide" class="anchor" href="#quick-installation-guide"><span class="octicon octicon-link"></span></a>Quick Installation Guide</h3>
@@ -54,6 +44,16 @@
   <span class="nb">cd </span>AntiTaintDroi/AntiTaintDroid-Server <span class="c"># change directory to AntiTaintDroid server</span>
   python antitaintdroid-server.py <span class="c"># runs the server</span>
 </pre></div>
+
+<h3>
+<a name="compiling-the-code" class="anchor" href="#compiling-the-code"><span class="octicon octicon-link"></span></a>Compiling the code</h3>
+
+<p>I have included both the Eclipse and Ant project files. You should just be able to import it in Eclipse and hit the <code>Run</code> button. Or, you can just do <code>ant debug install</code> to compile and install it on your TaintDroid phone.</p>
+
+<h3>
+<a name="how-it-works" class="anchor" href="#how-it-works"><span class="octicon octicon-link"></span></a>How it works</h3>
+
+<p>The mechanisms to bypass TaintDroid protections are elaborated in our <a href="http://www.nicta.com.au/pub?id=7091">paper</a>. Also, the code itself if pretty self-explanatory. Just go through <code>UntaintTricks.java</code> and you should be fine. You should note that the way this PoC app works is - first it collects some private information (e.g. IMEI, Android ID etc.) from the phone with <code>collectPrivateData()</code> and then it tries to leak it over the network. Where the data is leaked to depends on where you run the server component. AntiTaintDroid PoC comes with a simple Python server which you can find in <code>AntiTaintDroid-Server</code> directory. Just make sure that you <code>cd</code> inside the <code>AntiTaintDroid-Server</code> directory and then run the <code>python antitaintdroid-server.py</code> script. The server should start a very simple web-server on port <code>8000</code>. Now you can go back to the app and hit <code>menu &gt; settings</code> to specify your server IP address and port number. That's it! Now you are ready to try all the AntiTaintDroid tricks. Each time you tap on a trick, some private data (depending on what you have in <code>collectPrivateData()</code>) should be stolen, leaked to your server (<code>antitaintdroid-server.py</code> will print it on the console) and of course there won't be any TaintDroid notification to alert you that your IMEI has just been stolen. Cheers!</p>
       </section>
     </div>
 
