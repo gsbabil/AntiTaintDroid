@@ -11,6 +11,8 @@
 #   Purpose: Runs a very simple HTTP server for
 #            the AntiTaintDroid app to upload
 #            stolen private data.
+#   Copyright: 2012-2013, National ICT Australia (NICTA), Golam Sarwar
+#   License: GPL2 (see COPYING)
 #
 # ---------------------------------------------------------------
 #
