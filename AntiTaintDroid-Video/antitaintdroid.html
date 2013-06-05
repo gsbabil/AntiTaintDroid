@@ -1,0 +1,165 @@
+<!doctype html>
+<html>
+  <head>
+    <link href='http://fonts.googleapis.com/css?family=Macondo' rel='stylesheet' type='text/css'>
+    <link href='antitaintdroid.css' rel='stylesheet' type='text/css'>
+
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script type="text/javascript" src="http://popcornjs.org/code/dist/popcorn-complete.min.js"></script>  
+
+    <script type="text/javascript">
+    </script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+
+        var pop = Popcorn.youtube(
+          '#video',
+          'http://www.youtube.com/embed/watch?v=MTLSZ3ARudc&autoplay=1&loop=1&playlist=MTLSZ3ARudc'
+        );
+
+        pop.footnote({
+          start: 0, end: 5, target: "footnotediv",
+          text: "This video shows a demonstration of AntiTaintDroid a.k.a. ScrubDroid in action!",
+        });
+
+        pop.footnote({
+          start: 6, end: 10, target: "footnotediv",
+          text: "First we are going to show that TaintDroid is really running in the emulator.",
+        });
+
+        pop.footnote({
+          start: 11, end: 22, target: "footnotediv",
+          text: "As can be seen, TaintDroid works and it cought the evastion of IMEI by our AntiTaint/Scrub-Droid app.",
+        });
+
+        pop.footnote({
+          start: 24, end: 27, target: "footnotediv",
+          text: "Now we are going to test our attacks against TaintDroid. ",
+        });
+
+        pop.footnote({
+          start: 27, end: 30, target: "footnotediv",
+          text: "First, a very simple variable manipulation attack ...",
+        });
+
+        pop.footnote({
+          start: 30, end: 51, target: "footnotediv",
+          text: "IMEI (000000000000000 for the emulator) pop-up in the left-side server console indicates the evasion of private data. <br />",
+        });
+
+        pop.footnote({
+          start: 35, end: 51, target: "footnotediv",
+          text: "Now trying various other attacks ...",
+        });
+
+        pop.footnote({
+          start: 51, end: 55, target: "footnotediv",
+          text: "Remote Control Attack exploits a series of mutable conditionals coming from the attacker's server.",
+        });
+
+        pop.footnote({
+          start: 55, end: 61, target: "footnotediv",
+          text: "No TaintDroid pop-up alert means the attack wasn't detected.",
+        });
+
+        pop.footnote({
+          start: 61, end: 65, target: "footnotediv",
+          text: "Now verifying again that TaintDroid is still working for regular tainted variables as it should.",
+        });
+
+        pop.footnote({
+          start: 66, end: 74, target: "footnotediv",
+          text: "... and our attacks still work ;-)",
+        });
+
+        pop.footnote({
+          start: 70, end: 74, target: "footnotediv",
+          text: "<br />Thanks for watching.",
+        });
+
+        pop.play();
+
+      }, false);
+
+      /*
+       * Babil: YouTube audio hack - here I am loading a YouTube audio 
+       * in a 1x1 px container, and then I am using YouTube's Javascript
+       * API to control the playback. Since the video with the desired
+       * audio track is so little (1x1 px), it feels like audio is coming
+       * from a seperate track. This was done to avoid potential 
+       * licensing conflicts. I didn't want to upload Marlyn Manson's
+       * Resident Evil theme without holding a proper license.
+       *
+       */
+      var tag = document.createElement('script');
+      tag.src = "https://www.youtube.com/iframe_api";
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+      var player;
+      var paused = false;
+      function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+          height: '1',
+          width: '1',
+          videoId: 'wZ4JoovKWCU',
+          events: {
+            'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange
+          }
+        });
+      }
+      function onPlayerReady(evt) {
+        evt.target.playVideo();
+        Popcorn("#ourvideo").play();
+      }
+      function onPlayerStateChange(evt) {
+        ctrl = document.getElementById("audioButton");
+        if (evt.data == YT.PlayerState.PLAYING) {
+          paused = false;
+          ctrl.src = "mute.png";
+        } else if (evt.data == YT.PlayerState.ENDED) {
+          evt.target.playVideo();
+          paused = false;
+        } else {
+          paused = true;
+          ctrl.src = "sound.png";
+        }
+      }
+      function beepControl() {
+        ctrl = document.getElementById("audioButton");
+        
+        if (paused == false) {
+          player.stopVideo();
+          ctrl.src = "mute.png";
+        } else {
+          player.playVideo();
+          ctrl.src = "sound.png";
+        }
+      }
+    </script>
+  </head>
+
+  <body>
+
+  <!-- Div to preload images with CSS hack-->
+  <div id="preloadedImages"></div>
+  
+  <!-- Popcorn.js video element -->
+  <div id="video"></div>
+
+  <!-- Audio control button -->
+  <img id="audioButton" src="mute.png" onclick="beepControl()"/>
+  
+  <!-- Popcorn.js captions -->
+  <div class="wrapper">
+    <div id="footnotediv" style="margin: 10px auto;"></div>
+    <div class="ribbon-wrapper-green">
+      <div class="ribbon-green">Caption</div>
+    </div>
+  </div>
+  
+  <div id="player"></div>
+
+ </body>
+</html>
