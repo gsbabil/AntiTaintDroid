@@ -8,6 +8,146 @@
     <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
 
+    <!-- Babil: start custom edit  -->
+    <link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Macondo'>
+    <link rel='stylesheet' type='text/css' href='stylesheets/antitaintdroid.css'>
+
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script type="text/javascript" src="http://popcornjs.org/code/dist/popcorn-complete.min.js"></script>  
+
+    <script>
+
+      document.addEventListener("DOMContentLoaded", function () {
+
+        var pop = Popcorn.youtube(
+          '#video',
+          'http://www.youtube.com/embed/watch?v=MTLSZ3ARudc&autoplay=1&loop=1&playlist=MTLSZ3ARudc'
+        );
+
+        // pop.footnote({
+        //   start: 0, end: 5, target: "footnotediv",
+        //   text: "This video shows a demonstration of AntiTaintDroid a.k.a. ScrubDroid in action!",
+        // });
+
+        // pop.footnote({
+        //   start: 6, end: 10, target: "footnotediv",
+        //   text: "First we are going to show that TaintDroid is really running in the emulator.",
+        // });
+
+        // pop.footnote({
+        //   start: 11, end: 22, target: "footnotediv",
+        //   text: "As can be seen, TaintDroid works and it cought the evastion of IMEI by our AntiTaint/Scrub-Droid app.",
+        // });
+
+        // pop.footnote({
+        //   start: 24, end: 27, target: "footnotediv",
+        //   text: "Now we are going to test our attacks against TaintDroid. ",
+        // });
+
+        // pop.footnote({
+        //   start: 27, end: 30, target: "footnotediv",
+        //   text: "First, a very simple variable manipulation attack ...",
+        // });
+
+        // pop.footnote({
+        //   start: 30, end: 51, target: "footnotediv",
+        //   text: "IMEI (000000000000000 for the emulator) pop-up in the left-side server console indicates the evasion of private data. <br />",
+        // });
+
+        // pop.footnote({
+        //   start: 35, end: 51, target: "footnotediv",
+        //   text: "Now trying various other attacks ...",
+        // });
+
+        // pop.footnote({
+        //   start: 51, end: 55, target: "footnotediv",
+        //   text: "Remote Control Attack exploits a series of mutable conditionals coming from the attacker's server.",
+        // });
+
+        // pop.footnote({
+        //   start: 55, end: 61, target: "footnotediv",
+        //   text: "No TaintDroid pop-up alert means the attack wasn't detected.",
+        // });
+
+        // pop.footnote({
+        //   start: 61, end: 65, target: "footnotediv",
+        //   text: "Now verifying again that TaintDroid is still working for regular tainted variables as it should.",
+        // });
+
+        // pop.footnote({
+        //   start: 66, end: 74, target: "footnotediv",
+        //   text: "... and our attacks still work ;-)",
+        // });
+
+        // pop.footnote({
+        //   start: 70, end: 74, target: "footnotediv",
+        //   text: "<br />Thanks for watching.",
+        // });
+
+
+        pop.play();
+
+      }, false);
+
+      /*
+       * Babil: YouTube audio hack - here I am loading a YouTube audio 
+       * in a 1x1 px container, and then I am using YouTube's Javascript
+       * API to control the playback. Since the video with the desired
+       * audio track is so little (1x1 px), it feels like audio is coming
+       * from a seperate track. This was done to avoid potential 
+       * licensing conflicts. I didn't want to upload Marlyn Manson's
+       * Resident Evil theme without holding a proper license.
+       *
+       */
+      var tag = document.createElement('script');
+      tag.src = "https://www.youtube.com/iframe_api";
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+      var player;
+      var paused = false;
+      function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+          height: '1',
+          width: '1',
+          videoId: 'wZ4JoovKWCU',
+          events: {
+            'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange
+          }
+        });
+      }
+      function onPlayerReady(evt) {
+        // evt.target.playVideo();
+        Popcorn("#video").play();
+      }
+      function onPlayerStateChange(evt) {
+        ctrl = document.getElementById("audioButton");
+        if (evt.data == YT.PlayerState.PLAYING) {
+          paused = false;
+          ctrl.src = "images/mute.png";
+        } else if (evt.data == YT.PlayerState.ENDED) {
+          evt.target.playVideo();
+          paused = false;
+        } else {
+          paused = true;
+          ctrl.src = "images/sound.png";
+        }
+      }
+      function beepControl() {
+        ctrl = document.getElementById("audioButton");
+        
+        if (paused == false) {
+          player.stopVideo();
+          ctrl.src = "images/mute.png";
+        } else {
+          player.playVideo();
+          ctrl.src = "images/sound.png";
+        }
+      }
+    </script>
+
+    <!-- Babil: end custom edit  -->
+
     <title>AntiTaintDroid by gsbabil</title>
   </head>
 
@@ -38,7 +178,36 @@
 <ul>
 <li>Golam Sarwar, Olivier Mehani, Roksana Boreli, and Mohammed Ali Kaafar. “On the Effectiveness of Dynamic Taint Analysis for Protecting Against Private Information Leaks on Android-based Devices”. In: SECRYPT 2013, 10th International Conference on Security and Cryptography. Ed. by P. Samarati. ACM SIGSAC. Reykjávik, Iceland: SciTePress, July 2013.  url: <a href="http://www.nicta.com.au/pub?id=6865">http://www.nicta.com.au/pub?id=6865</a>;</li>
 <li>A <a href="2013sarwar_scrubdroid.bib">BibTeX file</a> is also available.</li>
-</ul><h3>
+</ul>
+
+<!-- Babil: start custom edit  -->
+
+<h3>
+<a name="video-demo" class="anchor" href="#video-demo"><span class="octicon octicon-link"></span></a>Video Demo</h3>
+
+  <!-- Div to preload images with CSS hack-->
+  <div id="preloadedImages"></div>
+  
+  <!-- Popcorn.js video element -->
+  <div id="video"></div>
+
+  <!-- Audio control button -->
+  <img id="audioButton" src="images/mute.png" onclick="beepControl()"/>
+  
+  <!-- Popcorn.js captions -->
+  <!-- 
+  <div class="wrapper">
+    <div id="footnotediv" style="margin: 10px auto;"></div>
+    <div class="ribbon-wrapper-green">
+      <div class="ribbon-green">Caption</div>
+    </div>
+  </div>
+  --> 
+  <div id="player"></div>
+
+<!-- Babil: end custom edit  -->
+
+<h3>
 <a name="quick-installation-guide" class="anchor" href="#quick-installation-guide"><span class="octicon octicon-link"></span></a>Quick Installation Guide</h3>
 
 <p>If you don't want to be hassled with compiling the app yourself, you may just follow the workflow below:</p>
@@ -69,8 +238,10 @@
 <li>William Enck, Peter Gilbert, Byung-Gon Chun, Landon P. Cox, Jaeyeon Jung, Patrick McDaniel and Anmol N.  Sheth, "TaintDroid: An information-flow tracking system for realtime privacy monitoring on smartphones," in OSDI 2010, 9th USENIX Symposium on Operating Systems Design and Implementation, R. Arpaci-Dusseau and B. Chen, Eds., USENIX; ACM SIGOPS.    Berkeley, CA, USA: USENIX Association, Oct. 2012. [Online]. Available: <a href="http://static.usenix.org/events/osdi10/tech/full_papers/Enck.pdf">http://static.usenix.org/events/osdi10/tech/full_papers/Enck.pdf</a>
 </li>
 </ul>
+
       </section>
     </div>
+
 
     
   </body>
