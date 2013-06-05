@@ -39,7 +39,7 @@ The mechanisms to bypass TaintDroid protections are [elaborated in our paper][2]
   [4]: http://secrypt.icete.org/?y=2013
   [5]: http://appanalysis.org/
   [6]: http://www.nicta.com.au/
-  [7]: 2013sarwar_scrubdroid.bib
+  [7]: https://github.com/gsbabil/AntiTaintDroid/blob/master/2013sarwar_scrubdroid.bib
   [8]: http://www.intel.com/research/
   [9]: http://www.cse.psu.edu/
   [10]: http://www.cs.duke.edu/
