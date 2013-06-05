@@ -1,3 +1,36 @@
+/*
+ * AntiTaintDroid/ScrubDroid
+ * Copyright (C) 2012-2013 National ICT Australia, Golam Sarwar
+ *
+ * AntiTaintDroid (a.k.a. ScrubDroid) [1] is a proof-of-concept Android application
+ * bypassing the security protections offered by TaintDroid [2].
+ *
+ * When referencing AntiTaintDroid/ScrubDroid, please use the following
+ * citation:
+ *   Golam Sarwar, Olivier Mehani, Roksana Boreli, and Mohammed Ali Kaafar. “On
+ *   the Effectiveness of Dynamic Taint Analysis for Protecting Against Private
+ *   Information Leaks on Android-based Devices”. In: SECRYPT 2013, 10th
+ *   International Conference on Security and Cryptography. Ed. by P. Samarati.
+ *   ACM SIGSAC. Reykjávik, Iceland: SciTePress, July 2013. url:
+ *   http://www.nicta.com.au/pub?id=6865;
+ *
+ * [1] http://nicta.info/scrubdroid
+ * [2] http://appanalysis.org/
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
 package com.gsbabil.antitaintdroid;
 
 import java.util.HashMap;
