@@ -38,9 +38,7 @@
 <ul>
 <li>Golam Sarwar, Olivier Mehani, Roksana Boreli, and Mohammed Ali Kaafar. “On the Effectiveness of Dynamic Taint Analysis for Protecting Against Private Information Leaks on Android-based Devices”. In: SECRYPT 2013, 10th International Conference on Security and Cryptography. Ed. by P. Samarati. ACM SIGSAC. Reykjávik, Iceland: SciTePress, July 2013.  url: <a href="http://www.nicta.com.au/pub?id=6865">http://www.nicta.com.au/pub?id=6865</a>;</li>
 <li>A <a href="2013sarwar_scrubdroid.bib">BibTeX file</a> is also available.</li>
-</ul><p><a href="http://appanalysis.org/">TaintDroid</a> is a joint collaboration between <a href="http://www.intel.com/research/">Intel Labs</a>, <a href="http://www.cse.psu.edu/">Penn State</a>, <a href="http://www.cs.duke.edu/">Duke University</a> and <a href="http://www.nsf.gov/">U.S. National Science Foundation</a>.</p>
-
-<h3>
+</ul><h3>
 <a name="quick-installation-guide" class="anchor" href="#quick-installation-guide"><span class="octicon octicon-link"></span></a>Quick Installation Guide</h3>
 
 <p>If you don't want to be hassled with compiling the app yourself, you may just follow the workflow below:</p>
@@ -61,6 +59,16 @@
 <a name="how-it-works" class="anchor" href="#how-it-works"><span class="octicon octicon-link"></span></a>How it works</h3>
 
 <p>The mechanisms to bypass TaintDroid protections are <a href="http://www.nicta.com.au/pub?id=7091">elaborated in our paper</a>. Also, the code itself if pretty self-explanatory. Just go through <code>UntaintTricks.java</code> and you should be fine. You should note that the way this PoC app works is - first it collects some private information (e.g. IMEI, Android ID etc.) from the phone with <code>collectPrivateData()</code> and then it tries to leak it over the network. Where the data is leaked to depends on where you run the server component. AntiTaintDroid PoC comes with a simple Python server which you can find in <code>AntiTaintDroid-Server</code> directory. Just make sure that you <code>cd</code> inside the <code>AntiTaintDroid-Server</code> directory and then run the <code>python antitaintdroid-server.py</code> script. The server should start a very simple web-server on port <code>8000</code>. Now you can go back to the app and hit <code>menu &gt; settings</code> to specify your server IP address and port number. That's it! Now you are ready to try all the AntiTaintDroid tricks. Each time you tap on a trick, some private data (depending on what you have in <code>collectPrivateData()</code>) should be stolen, leaked to your server (<code>antitaintdroid-server.py</code> will print it on the console) and of course there won't be any TaintDroid notification to alert you that your IMEI has just been stolen. Cheers!</p>
+
+<h3>
+<a name="references" class="anchor" href="#references"><span class="octicon octicon-link"></span></a>References</h3>
+
+<p><a href="http://appanalysis.org/">TaintDroid</a> is a joint collaboration between <a href="http://www.intel.com/research/">Intel Labs</a>, <a href="http://www.cse.psu.edu/">Penn State</a> and <a href="http://www.cs.duke.edu/">Duke University</a>, and funded by the <a href="http://www.nsf.gov/">U.S. National Science Foundation</a>.</p>
+
+<ul>
+<li>William Enck, Peter Gilbert, Byung-Gon Chun, Landon P. Cox, Jaeyeon Jung, Patrick McDaniel and Anmol N.  Sheth, "TaintDroid: An information-flow tracking system for realtime privacy monitoring on smartphones," in OSDI 2010, 9th USENIX Symposium on Operating Systems Design and Implementation, R. Arpaci-Dusseau and B. Chen, Eds., USENIX; ACM SIGOPS.    Berkeley, CA, USA: USENIX Association, Oct. 2012. [Online]. Available: <a href="http://static.usenix.org/events/osdi10/tech/full_papers/Enck.pdf">http://static.usenix.org/events/osdi10/tech/full_papers/Enck.pdf</a>
+</li>
+</ul>
       </section>
     </div>
 
