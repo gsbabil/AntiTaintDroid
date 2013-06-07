@@ -1,6 +1,8 @@
 AntiTaintDroid (a.k.a. ScrubDroid)
 ----------------------------------
 
+* Project homepage - [http://gsbabil.github.io/AntiTaintDroid][12]
+
 [AntiTaintDroid][1] (a.k.a. [ScrubDroid][2]) is a proof-of-concept Android application offering a working implementation of the [techniques presented in our paper][3] at [SECRYPT 2013][4] which can be exploited to bypass the security protections offered by [TaintDroid][5], a real-time privacy monitoring mechanism based on dynamic taint analysis.
 
 AntiTaintDroid/ScrubDroid is a work by [NICTA][6]. When referencing this work, please use the following citation:
@@ -44,3 +46,4 @@ The mechanisms to bypass TaintDroid protections are [elaborated in our paper][2]
   [9]: http://www.cse.psu.edu/
   [10]: http://www.cs.duke.edu/
   [11]: http://www.nsf.gov/
+  [12]: http://gsbabil.github.io/AntiTaintDroid
