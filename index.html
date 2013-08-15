@@ -109,7 +109,8 @@
         player = new YT.Player('player', {
           height: '1',
           width: '1',
-          videoId: 'wZ4JoovKWCU',
+          // videoId: 'wZ4JoovKWCU',
+          videoId: '9pqK3xD1yFQ',
           events: {
             'onReady': onPlayerReady,
             'onStateChange': onPlayerStateChange
@@ -117,7 +118,7 @@
         });
       }
       function onPlayerReady(evt) {
-        // evt.target.playVideo();
+        evt.target.playVideo();
         Popcorn("#video").play();
       }
       function onPlayerStateChange(evt) {
@@ -177,7 +178,7 @@
 
 <ul>
 <li>Golam Sarwar, Olivier Mehani, Roksana Boreli, and Mohammed Ali Kaafar. “On the Effectiveness of Dynamic Taint Analysis for Protecting Against Private Information Leaks on Android-based Devices”. In: SECRYPT 2013, 10th International Conference on Security and Cryptography. Ed. by P. Samarati. ACM SIGSAC. Reykjávik, Iceland: SciTePress, July 2013.  url: <a href="http://www.nicta.com.au/pub?id=6865">http://www.nicta.com.au/pub?id=6865</a>;</li>
-<li>A <a href="2013sarwar_scrubdroid.bib">BibTeX file</a> is also available.</li>
+<li>A <a href="https://github.com/gsbabil/AntiTaintDroid/blob/master/2013sarwar_scrubdroid.bib">BibTeX file</a> is also available.</li>
 </ul>
 
 <!-- Babil: start custom edit  -->
