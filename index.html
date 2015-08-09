@@ -13,7 +13,8 @@
     <link rel='stylesheet' type='text/css' href='stylesheets/antitaintdroid.css'>
 
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-    <script type="text/javascript" src="http://popcornjs.org/code/dist/popcorn-complete.min.js"></script>  
+    <!-- <script type="text/javascript" src="http://popcornjs.org/code/dist/popcorn-complete.min.js"></script> -->
+    <script type="text/javascript" src="javascripts/popcorn-complete.min.js"></script>
 
     <script>
 
@@ -90,11 +91,11 @@
       }, false);
 
       /*
-       * Babil: YouTube audio hack - here I am loading a YouTube audio 
+       * Babil: YouTube audio hack - here I am loading a YouTube audio
        * in a 1x1 px container, and then I am using YouTube's Javascript
        * API to control the playback. Since the video with the desired
        * audio track is so little (1x1 px), it feels like audio is coming
-       * from a seperate track. This was done to avoid potential 
+       * from a seperate track. This was done to avoid potential
        * licensing conflicts. I didn't want to upload Marlyn Manson's
        * Resident Evil theme without holding a proper license.
        *
@@ -136,7 +137,7 @@
       }
       function beepControl() {
         ctrl = document.getElementById("audioButton");
-        
+
         if (paused == false) {
           player.stopVideo();
           ctrl.src = "images/mute.png";
@@ -188,22 +189,22 @@
 
   <!-- Div to preload images with CSS hack-->
   <div id="preloadedImages"></div>
-  
+
   <!-- Popcorn.js video element -->
   <div id="video"></div>
 
   <!-- Audio control button -->
   <img id="audioButton" src="images/mute.png" onclick="beepControl()"/>
-  
+
   <!-- Popcorn.js captions -->
-  <!-- 
+  <!--
   <div class="wrapper">
     <div id="footnotediv" style="margin: 10px auto;"></div>
     <div class="ribbon-wrapper-green">
       <div class="ribbon-green">Caption</div>
     </div>
   </div>
-  --> 
+  -->
   <div id="player"></div>
 
 <!-- Babil: end custom edit  -->
@@ -244,6 +245,6 @@
     </div>
 
 
-    
+
   </body>
 </html>
